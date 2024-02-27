@@ -1,14 +1,12 @@
 package com.codurance.training.tasks;
 
-import CheckList.*;
-import CheckList.Iterator.Iterator;
-import Command.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
+import CheckList.*;
+import Command.*;
 
 
 public final class TaskList implements Runnable {
@@ -48,57 +46,28 @@ public final class TaskList implements Runnable {
 
     private void execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
-        String command = commandRest[0];
-        switch (command) {
+        String instruction = commandRest[0];
+        Command command;
+        switch (instruction) {
             case "show":
-                show();
+                command = new ShowCommand(this.projects);
                 break;
             case "add":
-                add(commandRest[1]);
+                command = new AddCommand(this.projects, commandRest[1]);
                 break;
             case "check":
-                check(commandRest[1]);
+                command = new CheckCommand(this.projects, commandRest[1]);
                 break;
             case "uncheck":
-                uncheck(commandRest[1]);
+                command = new unCheckCommand(this.projects, commandRest[1]);
                 break;
             case "help":
-                help();
+                command = new HelpCommand();
                 break;
             default:
-                error(command);
+                command = new ErrorCommand(instruction);
                 break;
         }
-    }
-
-    private void show() {
-       Command command = new ShowCommand(this.projects);
-        command.execute();
-    }
-
-    private void add(String commandLine) {
-       Command command = new AddCommand(this.projects, commandLine);
-       command.execute();
-    }
-
-    private void check(String idString) {
-        Command command = new CheckCommand(this.projects, idString);
-        command.execute();
-    }
-
-    private void uncheck(String idString) {
-        Command command = new unCheckCommand(this.projects, idString);
-        command.execute();
-    }
-
-
-    private void help() {
-        Command command = new HelpCommand();
-        command.execute();
-    }
-
-    private void error(String unKnowCommand) {
-        Command command = new ErrorCommand(unKnowCommand);
         command.execute();
     }
 }

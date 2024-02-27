@@ -4,7 +4,7 @@ import CheckList.Project;
 
 import java.util.LinkedHashMap;
 
-public class ShowCommand implements  Command{
+public class ShowCommand implements   Command{
     private final LinkedHashMap<String, Project> projects;
     public ShowCommand(LinkedHashMap<String, Project> projects){
         this.projects = projects;

@@ -8,9 +8,9 @@ import java.util.LinkedHashMap;
 
 public class AddTaskCommand implements Command{
 
-    private  String project_name;
-    private Project project;
-    private String description;
+    private final String project_name;
+    private final Project project;
+    private final String description;
     public AddTaskCommand(LinkedHashMap<String, Project> projects, String project_name, String description){
         this.project_name = project_name;
         this.project = projects.get(project_name);

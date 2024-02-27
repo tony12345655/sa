@@ -1,5 +1,7 @@
 package CheckList;
 
+import CheckList.Iterator.Iterator;
+
 public interface CheckList {
     void add(CheckList checkList);
     void check();
@@ -7,5 +9,8 @@ public interface CheckList {
     boolean isDone();
     long getId();
     String getDescription();
+    void show();
+
+    Iterator createIterator();
 
 }

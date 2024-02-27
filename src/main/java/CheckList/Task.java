@@ -1,5 +1,8 @@
 package CheckList;
 
+import CheckList.Iterator.Iterator;
+import CheckList.Iterator.NullIterator;
+
 public class Task implements CheckList{
 
     private final long id;
@@ -37,5 +40,15 @@ public class Task implements CheckList{
     @Override
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public void show() {
+        System.out.printf("    [%c] %d: %s%n", (this.isDone() ? 'x' : ' '), this.getId(), this.getDescription());
+    }
+
+    @Override
+    public Iterator createIterator() {
+        return new NullIterator(this);
     }
 }

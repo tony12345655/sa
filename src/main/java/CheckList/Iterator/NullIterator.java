@@ -7,6 +7,7 @@ public class NullIterator implements Iterator{
     private final Task task;
     public NullIterator(Task task){
         this.task = task;
+        first();
     }
 
     @Override
@@ -26,6 +27,6 @@ public class NullIterator implements Iterator{
 
     @Override
     public boolean isDone() {
-        return false;
+        return true;
     }
 }

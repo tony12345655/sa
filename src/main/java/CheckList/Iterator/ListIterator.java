@@ -28,6 +28,6 @@ public class ListIterator implements Iterator{
 
     @Override
     public boolean isDone() {
-        return this.now != this.checkLists.size();
+        return this.now == this.checkLists.size();
     }
 }

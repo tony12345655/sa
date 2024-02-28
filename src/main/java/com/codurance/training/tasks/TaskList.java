@@ -12,7 +12,7 @@ import command.*;
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
     private final BufferedReader in;
-    private final PrintWriter out;
+    public static PrintWriter out;
     private final LinkedHashMap<String, Command> commands = new LinkedHashMap<String, Command>();
 
     public static void main(String[] args) throws Exception {
@@ -23,7 +23,7 @@ public final class TaskList implements Runnable {
 
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
-        this.out = writer;
+        out = writer;
         LinkedHashMap<String, Project> projects = new LinkedHashMap<>();
         commands.put("show", new ShowCommand(projects));
         commands.put("help", new HelpCommand());

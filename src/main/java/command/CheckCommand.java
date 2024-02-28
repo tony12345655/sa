@@ -15,7 +15,7 @@ public class CheckCommand implements Command{
     public void execute(String nextCommand) {
         for (String project_name : this.projects.keySet()){
             Project project = this.projects.get(project_name);
-            for (Iterator it = project.createIterator(); it.isDone(); it.next()){
+            for (Iterator it = project.createIterator(); !it.isDone(); it.next()){
                 if (it.currentItem().getId() == Long.parseLong(nextCommand))
                     it.currentItem().check();
             }

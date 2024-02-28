@@ -2,6 +2,7 @@ package checkList;
 import checkList.Iterator.Iterator;
 import checkList.Iterator.ListIterator;
 import com.codurance.training.tasks.TaskList;
+import output.Out;
 
 import java.util.ArrayList;
 
@@ -55,10 +56,10 @@ public class Project implements CheckList{
 
     @Override
     public void show() {
-        TaskList.out.println(this.name);
+        Out.getInstance().println(this.name);
         for (CheckList task : this.tasks)
             task.show();
-        TaskList.out.println();
+        Out.getInstance().println();
     }
 
     @Override

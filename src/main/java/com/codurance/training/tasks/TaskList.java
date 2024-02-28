@@ -7,12 +7,13 @@ import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import checkList.*;
 import command.*;
+import output.Out;
 
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
     private final BufferedReader in;
-    public static PrintWriter out;
+    private final PrintWriter out;
     private final LinkedHashMap<String, Command> commands = new LinkedHashMap<String, Command>();
 
     public static void main(String[] args) throws Exception {
@@ -22,8 +23,9 @@ public final class TaskList implements Runnable {
     }
 
     public TaskList(BufferedReader reader, PrintWriter writer) {
+        Out.setInstance(writer);
         this.in = reader;
-        out = writer;
+        this.out = Out.getInstance();
         LinkedHashMap<String, Project> projects = new LinkedHashMap<>();
         commands.put("show", new ShowCommand(projects));
         commands.put("help", new HelpCommand());
@@ -34,11 +36,11 @@ public final class TaskList implements Runnable {
 
     public void run() {
         while (true) {
-            out.print("> ");
-            out.flush();
+            this.out.print("> ");
+            this.out.flush();
             String command;
             try {
-                command = in.readLine();
+                command = this.in.readLine();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

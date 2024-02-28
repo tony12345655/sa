@@ -3,6 +3,7 @@ package checkList;
 import checkList.Iterator.Iterator;
 import checkList.Iterator.NullIterator;
 import com.codurance.training.tasks.TaskList;
+import output.Out;
 
 public class Task implements CheckList{
 
@@ -45,7 +46,7 @@ public class Task implements CheckList{
 
     @Override
     public void show() {
-        TaskList.out.printf("    [%c] %d: %s%n", (this.isDone() ? 'x' : ' '), this.getId(), this.getDescription());
+        Out.getInstance().printf("    [%c] %d: %s%n", (this.isDone() ? 'x' : ' '), this.getId(), this.getDescription());
     }
 
     @Override

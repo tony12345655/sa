@@ -1,14 +1,16 @@
 package command;
 
+import output.Out;
+
 public class HelpCommand implements Command{
     @Override
     public void execute(String nextCommand) {
-        System.out.println("Commands:");
-        System.out.println("  show");
-        System.out.println("  add project <project name>");
-        System.out.println("  add task <project name> <task description>");
-        System.out.println("  check <task ID>");
-        System.out.println("  uncheck <task ID>");
-        System.out.println();
+        Out.getInstance().println("Commands:");
+        Out.getInstance().println("  show");
+        Out.getInstance().println("  add project <project name>");
+        Out.getInstance().println("  add task <project name> <task description>");
+        Out.getInstance().println("  check <task ID>");
+        Out.getInstance().println("  uncheck <task ID>");
+        Out.getInstance().println();
     }
 }

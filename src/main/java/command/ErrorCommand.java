@@ -1,5 +1,7 @@
 package command;
 
+import output.Out;
+
 public class ErrorCommand implements Command{
 
     private final String unKnowCommand;
@@ -8,7 +10,7 @@ public class ErrorCommand implements Command{
     }
     @Override
     public void execute(String nextCommand) {
-        System.out.printf("I don't know what the command \"%s\" is.", this.unKnowCommand);
-        System.out.println();
+        Out.getInstance().printf("I don't know what the command \"%s\" is.", this.unKnowCommand);
+        Out.getInstance().println();
     }
 }

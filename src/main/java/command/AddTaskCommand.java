@@ -4,6 +4,7 @@ import checkList.CheckListFactory;
 import checkList.Project;
 import checkList.Task;
 import com.codurance.training.tasks.TaskList;
+import output.Out;
 
 import java.util.LinkedHashMap;
 
@@ -20,8 +21,8 @@ public class AddTaskCommand implements Command{
         String[] commandRest = nextCommand.split(" ", 2);
         Project project = this.projects.get(commandRest[0]);
         if (project == null) {
-            System.out.printf("Could not find a project with the name \"%s\".", commandRest[0]);
-            System.out.println();
+            Out.getInstance().printf("Could not find a project with the name \"%s\".", commandRest[0]);
+            Out.getInstance().println();
             return;
         }
         Task task = CheckListFactory.getInstance().createTask(commandRest[1]);

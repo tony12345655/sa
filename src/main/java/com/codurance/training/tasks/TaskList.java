@@ -24,7 +24,7 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
-        LinkedHashMap<String, Project> projects = new LinkedHashMap<String, Project>();
+        LinkedHashMap<String, Project> projects = new LinkedHashMap<>();
         commands.put("show", new ShowCommand(projects));
         commands.put("help", new HelpCommand());
         commands.put("add", new AddCommand(projects));

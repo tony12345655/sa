@@ -10,7 +10,6 @@ public interface CheckList {
     long getId();
     String getDescription();
     void show();
-
     Iterator createIterator();
 
 }

@@ -9,9 +9,16 @@ public class TaskTest {
 
     @BeforeClass
     public static void createTask(){
+        long Id = 1;
         String description = "Finish Homework";
-        task = CheckListFactory.getInstance().createTask(description);
+        task = new Task(Id, description);
     }
+
+    @Test
+    public void checkTaskId(){
+        Assert.assertEquals(1, task.getId());
+    }
+
     @Test
     public void checkTaskDescription(){
         Assert.assertEquals("Finish Homework", task.getDescription());

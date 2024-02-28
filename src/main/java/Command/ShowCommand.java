@@ -11,7 +11,7 @@ public class ShowCommand implements   Command{
     }
 
     @Override
-    public void execute() {
+    public void execute(String nextCommand) {
         for (String project_name : this.projects.keySet())
             this.projects.get(project_name).show();
     }

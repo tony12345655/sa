@@ -6,22 +6,21 @@ import java.util.LinkedHashMap;
 
 public class AddCommand implements Command{
     private final LinkedHashMap<String, Project> projects;
-    private final String[] subcommandRest;
-    public AddCommand(LinkedHashMap<String, Project> projects, String commandLine){
+    public AddCommand(LinkedHashMap<String, Project> projects){
         this.projects = projects;
-        this.subcommandRest = commandLine.split(" ", 2);
     }
 
     @Override
-    public void execute() {
-        if (this.subcommandRest[0].equals("project")){
-            Command command = new AddProjectCommand(this.projects, this.subcommandRest[1]);
-            command.execute();
+    public void execute(String nextCommand) {
+        String[] subcommandRest = nextCommand.split(" ", 2);
+        if (subcommandRest[0].equals("project")){
+            Command command = new AddProjectCommand(this.projects);
+            command.execute(subcommandRest[1]);
         }
-        else if (this.subcommandRest[0].equals("task")){
+        else if (subcommandRest[0].equals("task")){
             String[] projectTask = subcommandRest[1].split(" ", 2);
-            Command command = new AddTaskCommand(this.projects, projectTask[0], projectTask[1]);
-            command.execute();
+            Command command = new AddTaskCommand(this.projects);
+            command.execute(subcommandRest[1]);
         }
     }
 }

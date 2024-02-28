@@ -7,18 +7,17 @@ import java.util.LinkedHashMap;
 
 public class unCheckCommand implements  Command{
     private final LinkedHashMap<String, Project> projects;
-    private final String idString;
-    public unCheckCommand(LinkedHashMap<String, Project> projects, String idString){
+
+    public unCheckCommand(LinkedHashMap<String, Project> projects){
         this.projects = projects;
-        this.idString = idString;
     }
 
     @Override
-    public void execute() {
+    public void execute(String nextCommand) {
         for (String project_name : this.projects.keySet()){
             Project project = this.projects.get(project_name);
             for (Iterator it = project.createIterator(); it.isDone(); it.next()){
-                if (it.currentItem().getId() == Long.parseLong(this.idString))
+                if (it.currentItem().getId() == Long.parseLong(nextCommand))
                     it.currentItem().unCheck();
             }
         }

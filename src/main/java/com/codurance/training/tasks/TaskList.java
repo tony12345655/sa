@@ -13,6 +13,8 @@ public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
     private final BufferedReader in;
     private final PrintWriter out;
+    private final LinkedHashMap<String, Project> projects = new LinkedHashMap<String, Project>();
+    private final LinkedHashMap<String, Command> commands = new LinkedHashMap<String, Command>();
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -23,9 +25,12 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
+        commands.put("show", new ShowCommand(this.projects));
+        commands.put("help", new HelpCommand());
+        commands.put("add", new AddCommand(this.projects));
+        commands.put("check", new CheckCommand(this.projects));
+        commands.put("uncheck", new unCheckCommand(this.projects));
     }
-
-    private final LinkedHashMap<String, Project> projects = new LinkedHashMap<String, Project>();
 
     public void run() {
         while (true) {
@@ -48,26 +53,14 @@ public final class TaskList implements Runnable {
         String[] commandRest = commandLine.split(" ", 2);
         String instruction = commandRest[0];
         Command command;
-        switch (instruction) {
-            case "show":
-                command = new ShowCommand(this.projects);
-                break;
-            case "add":
-                command = new AddCommand(this.projects, commandRest[1]);
-                break;
-            case "check":
-                command = new CheckCommand(this.projects, commandRest[1]);
-                break;
-            case "uncheck":
-                command = new unCheckCommand(this.projects, commandRest[1]);
-                break;
-            case "help":
-                command = new HelpCommand();
-                break;
-            default:
-                command = new ErrorCommand(instruction);
-                break;
-        }
-        command.execute();
+        if (this.commands.get(instruction) == null)
+            command = new ErrorCommand(instruction);
+        else
+            command = this.commands.get(instruction);
+
+        if (commandRest.length == 1)
+            command.execute("");
+        else
+            command.execute(commandRest[1]);
     }
 }

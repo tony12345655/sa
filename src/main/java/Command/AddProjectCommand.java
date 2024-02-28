@@ -7,16 +7,14 @@ import java.util.LinkedHashMap;
 
 public class AddProjectCommand implements Command{
     private final LinkedHashMap<String, Project> projects;
-    private final String name;
 
-    public AddProjectCommand(LinkedHashMap<String, Project> projects, String name){
+    public AddProjectCommand(LinkedHashMap<String, Project> projects){
         this.projects = projects;
-        this.name = name;
-    };
+    }
 
     @Override
-    public void execute() {
-        Project project = CheckListFactory.getInstance().createProject(this.name);
-        this.projects.put(this.name, project);
+    public void execute(String nextCommand) {
+        Project project = CheckListFactory.getInstance().createProject(nextCommand);
+        this.projects.put(nextCommand, project);
     }
 }

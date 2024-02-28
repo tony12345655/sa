@@ -8,23 +8,22 @@ import java.util.LinkedHashMap;
 
 public class AddTaskCommand implements Command{
 
-    private final String project_name;
-    private final Project project;
-    private final String description;
-    public AddTaskCommand(LinkedHashMap<String, Project> projects, String project_name, String description){
-        this.project_name = project_name;
-        this.project = projects.get(project_name);
-        this.description = description;
+    private final LinkedHashMap<String, Project> projects;
+
+    public AddTaskCommand(LinkedHashMap<String, Project> projects){
+        this.projects = projects;
     }
 
     @Override
-    public void execute() {
-        if (this.project == null) {
-            System.out.printf("Could not find a project with the name \"%s\".", this.project_name);
+    public void execute(String nextCommand) {
+        String[] commandRest = nextCommand.split(" ", 2);
+        Project project = this.projects.get(commandRest[0]);
+        if (project == null) {
+            System.out.printf("Could not find a project with the name \"%s\".", commandRest[0]);
             System.out.println();
             return;
         }
-        Task task = CheckListFactory.getInstance().createTask(description);
-        this.project.add(task);
+        Task task = CheckListFactory.getInstance().createTask(commandRest[1]);
+        project.add(task);
     }
 }

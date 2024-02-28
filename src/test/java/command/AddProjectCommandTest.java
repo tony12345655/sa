@@ -1,6 +1,6 @@
-package Command;
+package command;
 
-import CheckList.Project;
+import checkList.Project;
 import org.junit.Assert;
 import org.junit.Test;
 

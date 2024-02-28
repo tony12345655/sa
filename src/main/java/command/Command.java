@@ -1,6 +1,4 @@
-package Command;
-
-import java.util.LinkedHashMap;
+package command;
 
 public interface Command {
     void execute(String nextCommand);

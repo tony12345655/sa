@@ -1,7 +1,7 @@
-package CheckList;
+package checkList;
 
-import CheckList.Iterator.Iterator;
-import CheckList.Iterator.NullIterator;
+import checkList.Iterator.Iterator;
+import checkList.Iterator.NullIterator;
 
 public class Task implements CheckList{
 

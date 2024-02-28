@@ -1,4 +1,4 @@
-package CheckList;
+package checkList;
 
 public class CheckListFactory {
     private static CheckListFactory instance;

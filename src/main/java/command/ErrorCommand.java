@@ -1,8 +1,4 @@
-package Command;
-
-import CheckList.Project;
-
-import java.util.LinkedHashMap;
+package command;
 
 public class ErrorCommand implements Command{
 

@@ -1,7 +1,7 @@
-package Command;
+package command;
 
-import CheckList.CheckListFactory;
-import CheckList.Project;
+import checkList.CheckListFactory;
+import checkList.Project;
 
 import java.util.LinkedHashMap;
 

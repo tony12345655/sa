@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
-import CheckList.*;
-import Command.*;
+import checkList.*;
+import command.*;
 
 
 public final class TaskList implements Runnable {

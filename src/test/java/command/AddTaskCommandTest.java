@@ -1,7 +1,7 @@
-package Command;
+package command;
 
-import CheckList.*;
-import CheckList.Iterator.Iterator;
+import checkList.*;
+import checkList.Iterator.Iterator;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.LinkedHashMap;

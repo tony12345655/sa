@@ -1,8 +1,8 @@
-package CheckList.Iterator;
+package checkList.Iterator;
 
-import CheckList.CheckList;
-import CheckList.CheckListFactory;
-import CheckList.Task;
+import checkList.CheckList;
+import checkList.CheckListFactory;
+import checkList.Task;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;

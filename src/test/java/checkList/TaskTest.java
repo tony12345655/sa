@@ -1,4 +1,4 @@
-package CheckList;
+package checkList;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

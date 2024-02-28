@@ -1,6 +1,6 @@
-package CheckList.Iterator;
+package checkList.Iterator;
 
-import CheckList.*;
+import checkList.*;
 
 public class NullIterator implements Iterator{
 

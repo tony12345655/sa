@@ -1,6 +1,6 @@
-package CheckList.Iterator;
+package checkList.Iterator;
 
-import CheckList.*;
+import checkList.*;
 
 public interface Iterator {
     void first();

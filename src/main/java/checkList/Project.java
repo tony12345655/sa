@@ -1,6 +1,6 @@
-package CheckList;
-import CheckList.Iterator.Iterator;
-import CheckList.Iterator.ListIterator;
+package checkList;
+import checkList.Iterator.Iterator;
+import checkList.Iterator.ListIterator;
 
 import java.util.ArrayList;
 

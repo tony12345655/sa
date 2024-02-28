@@ -5,10 +5,10 @@ import checkList.Project;
 
 import java.util.LinkedHashMap;
 
-public class unCheckCommand implements  Command{
+public class UnCheckCommand implements  Command{
     private final LinkedHashMap<String, Project> projects;
 
-    public unCheckCommand(LinkedHashMap<String, Project> projects){
+    public UnCheckCommand(LinkedHashMap<String, Project> projects){
         this.projects = projects;
     }
 

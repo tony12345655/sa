@@ -29,7 +29,7 @@ public final class TaskList implements Runnable {
         commands.put("help", new HelpCommand());
         commands.put("add", new AddCommand(projects));
         commands.put("check", new CheckCommand(projects));
-        commands.put("uncheck", new unCheckCommand(projects));
+        commands.put("uncheck", new UnCheckCommand(projects));
     }
 
     public void run() {

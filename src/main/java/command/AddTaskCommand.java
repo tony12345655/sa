@@ -20,8 +20,8 @@ public class AddTaskCommand implements Command{
         String[] commandRest = nextCommand.split(" ", 2);
         Project project = this.projects.get(commandRest[0]);
         if (project == null) {
-            TaskList.out.printf("Could not find a project with the name \"%s\".", commandRest[0]);
-            TaskList.out.println();
+            System.out.printf("Could not find a project with the name \"%s\".", commandRest[0]);
+            System.out.println();
             return;
         }
         Task task = CheckListFactory.getInstance().createTask(commandRest[1]);

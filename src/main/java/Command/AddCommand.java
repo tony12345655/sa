@@ -18,7 +18,6 @@ public class AddCommand implements Command{
             command.execute(subcommandRest[1]);
         }
         else if (subcommandRest[0].equals("task")){
-            String[] projectTask = subcommandRest[1].split(" ", 2);
             Command command = new AddTaskCommand(this.projects);
             command.execute(subcommandRest[1]);
         }

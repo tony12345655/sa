@@ -13,7 +13,6 @@ public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
     private final BufferedReader in;
     private final PrintWriter out;
-    private final LinkedHashMap<String, Project> projects = new LinkedHashMap<String, Project>();
     private final LinkedHashMap<String, Command> commands = new LinkedHashMap<String, Command>();
 
     public static void main(String[] args) throws Exception {
@@ -25,11 +24,12 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
-        commands.put("show", new ShowCommand(this.projects));
+        LinkedHashMap<String, Project> projects = new LinkedHashMap<String, Project>();
+        commands.put("show", new ShowCommand(projects));
         commands.put("help", new HelpCommand());
-        commands.put("add", new AddCommand(this.projects));
-        commands.put("check", new CheckCommand(this.projects));
-        commands.put("uncheck", new unCheckCommand(this.projects));
+        commands.put("add", new AddCommand(projects));
+        commands.put("check", new CheckCommand(projects));
+        commands.put("uncheck", new unCheckCommand(projects));
     }
 
     public void run() {
@@ -59,7 +59,7 @@ public final class TaskList implements Runnable {
             command = this.commands.get(instruction);
 
         if (commandRest.length == 1)
-            command.execute("");
+            command.execute(null);
         else
             command.execute(commandRest[1]);
     }

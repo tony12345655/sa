@@ -1,31 +1,21 @@
 package command;
 
-import checkList.CheckListFactory;
-import checkList.Project;
-import checkList.Task;
-import com.codurance.training.tasks.TaskList;
-import output.Out;
+import application.TaskApplication;
+import project.Project;
+import project.Task;
 
 import java.util.LinkedHashMap;
 
 public class AddTaskCommand implements Command{
-
-    private final LinkedHashMap<String, Project> projects;
-
-    public AddTaskCommand(LinkedHashMap<String, Project> projects){
-        this.projects = projects;
-    }
-
     @Override
-    public void execute(String nextCommand) {
+    public String execute(LinkedHashMap<String, Project> projects, String nowCommand, String nextCommand) {
         String[] commandRest = nextCommand.split(" ", 2);
-        Project project = this.projects.get(commandRest[0]);
+        Project project = projects.get(commandRest[0]);
         if (project == null) {
-            Out.getInstance().printf("Could not find a project with the name \"%s\".", commandRest[0]);
-            Out.getInstance().println();
-            return;
+            return String.format("Could not find a project with the name \"%s\".", commandRest[0]) + '\n';
         }
-        Task task = CheckListFactory.getInstance().createTask(commandRest[1]);
-        project.add(task);
+        Task task = TaskApplication.getInstance().createTask(commandRest[1]);
+        project.AddTask(task);
+        return "";
     }
 }

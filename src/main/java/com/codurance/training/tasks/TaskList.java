@@ -5,16 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
-import checkList.*;
-import command.*;
-import output.Out;
+
+import IO.IO;
+import IO.Shell;
+import adapter.CommandAdapter;
+import project.Project;
 
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
-    private final BufferedReader in;
-    private final PrintWriter out;
-    private final LinkedHashMap<String, Command> commands = new LinkedHashMap<String, Command>();
+    private final IO io;
+    private final LinkedHashMap<String, Project> projects = new LinkedHashMap<>();
 
     public static void main(String[] args) throws Exception {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -23,46 +24,24 @@ public final class TaskList implements Runnable {
     }
 
     public TaskList(BufferedReader reader, PrintWriter writer) {
-        Out.setInstance(writer);
-        this.in = reader;
-        this.out = Out.getInstance();
-        LinkedHashMap<String, Project> projects = new LinkedHashMap<>();
-        commands.put("show", new ShowCommand(projects));
-        commands.put("help", new HelpCommand());
-        commands.put("add", new AddCommand(projects));
-        commands.put("check", new CheckCommand(projects));
-        commands.put("uncheck", new UnCheckCommand(projects));
+        this.io = new Shell(reader, writer);
     }
 
     public void run() {
         while (true) {
-            this.out.print("> ");
-            this.out.flush();
+            this.io.Output("> ");
+            this.io.Flush();
             String command;
             try {
-                command = this.in.readLine();
+                command = this.io.Input();
+                CommandAdapter commandAdapter = new CommandAdapter(this.projects, command);
+                commandAdapter.run(this.io);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            if (command.equals(QUIT)) {
+            if (command.equals(QUIT))
                 break;
-            }
-            execute(command);
+
         }
-    }
-
-    private void execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        String instruction = commandRest[0];
-        Command command;
-        if (this.commands.get(instruction) == null)
-            command = new ErrorCommand(instruction);
-        else
-            command = this.commands.get(instruction);
-
-        if (commandRest.length == 1)
-            command.execute(null);
-        else
-            command.execute(commandRest[1]);
     }
 }

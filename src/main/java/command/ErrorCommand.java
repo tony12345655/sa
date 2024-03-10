@@ -1,16 +1,11 @@
 package command;
 
-import output.Out;
+import project.Project;
+import java.util.LinkedHashMap;
 
 public class ErrorCommand implements Command{
-
-    private final String unKnowCommand;
-    public ErrorCommand(String unKnowCommand){
-        this.unKnowCommand = unKnowCommand;
-    }
     @Override
-    public void execute(String nextCommand) {
-        Out.getInstance().printf("I don't know what the command \"%s\" is.", this.unKnowCommand);
-        Out.getInstance().println();
+    public String execute(LinkedHashMap<String, Project> projects, String nowCommand, String nextCommand) {
+        return String.format("I don't know what the command \"%s\" is.", nowCommand) + '\n';
     }
 }

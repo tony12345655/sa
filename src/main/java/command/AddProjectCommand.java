@@ -1,20 +1,15 @@
 package command;
 
-import checkList.CheckListFactory;
-import checkList.Project;
+import application.ProjectApplication;
+import project.Project;
 
 import java.util.LinkedHashMap;
 
 public class AddProjectCommand implements Command{
-    private final LinkedHashMap<String, Project> projects;
-
-    public AddProjectCommand(LinkedHashMap<String, Project> projects){
-        this.projects = projects;
-    }
-
     @Override
-    public void execute(String nextCommand) {
-        Project project = CheckListFactory.getInstance().createProject(nextCommand);
-        this.projects.put(nextCommand, project);
+    public String execute(LinkedHashMap<String, Project> projects, String nowCommand, String nextCommand) {
+        Project project = ProjectApplication.getInstance().createProject(nextCommand);
+        projects.put(nextCommand, project);
+        return "";
     }
 }

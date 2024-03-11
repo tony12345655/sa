@@ -29,11 +29,11 @@ public final class TaskList implements Runnable {
 
     public void run() {
         while (true) {
-            this.io.Output("> ");
+            this.io.output("> ");
             this.io.Flush();
             String command;
             try {
-                command = this.io.Input();
+                command = this.io.input();
                 CommandAdapter commandAdapter = new CommandAdapter(this.projects, command);
                 commandAdapter.run(this.io);
             } catch (IOException e) {

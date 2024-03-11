@@ -23,11 +23,11 @@ public class CommandAdapter {
     }
     public void run(IO io) {
         Command command;
-        if (CommandApplication.getInstance().CreateCommand(this.nowCommandLine) != null)
-            command = CommandApplication.getInstance().CreateCommand(this.nowCommandLine);
+        if (CommandApplication.getInstance().createCommand(this.nowCommandLine) != null)
+            command = CommandApplication.getInstance().createCommand(this.nowCommandLine);
         else
-            command = CommandApplication.getInstance().CreateCommand("error");
+            command = CommandApplication.getInstance().createCommand("error");
         String result = command.execute(this.projects, this.nowCommandLine, this.nextCommandLine);
-        io.Output(result);
+        io.output(result);
     }
 }

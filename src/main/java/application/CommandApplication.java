@@ -25,7 +25,7 @@ public class CommandApplication {
         return  instance;
     }
 
-    public Command CreateCommand(String name){
+    public Command createCommand(String name){
         return commands.get(name);
     }
 }

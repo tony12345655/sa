@@ -14,12 +14,12 @@ public class Shell implements IO{
     }
 
     @Override
-    public String Input() throws IOException {
+    public String input() throws IOException {
        return this.in.readLine();
     }
 
     @Override
-    public void Output(String str) {
+    public void output(String str) {
         this.out.print(str);
     }
 

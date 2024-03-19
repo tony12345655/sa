@@ -1,16 +1,16 @@
-package command;
+package useCase.command;
 
-import project.Project;
-import project.Task;
+import entity.Project;
+import useCase.Projects;
+import entity.Task;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class ShowCommand implements Command{
     @Override
-    public String execute(LinkedHashMap<String, Project> projects, String nowCommand, String nextCommand) {
+    public String execute() {
         StringBuilder result = new StringBuilder();
-        for (Map.Entry<String, Project> project : projects.entrySet()){
+        for (Map.Entry<String, Project> project : Projects.getInstance().entrySet()){
             result.append(project.getKey()).append("\r\n");
             for (Task task : project.getValue().getTasks()){
                 String str = String.format("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());

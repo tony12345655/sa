@@ -6,6 +6,5 @@ public interface IO {
 
     public String input() throws IOException;
     public void output(String str);
-
-    public void Flush();
+    public void flush();
 }

@@ -1,4 +1,4 @@
-package project;
+package entity;
 
 public final class Task {
     private final long id;

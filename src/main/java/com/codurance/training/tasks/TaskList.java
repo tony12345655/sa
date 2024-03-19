@@ -8,8 +8,11 @@ import java.util.LinkedHashMap;
 
 import IO.IO;
 import IO.Shell;
-import adapter.CommandAdapter;
-import project.Project;
+import adapter.controller.commandController.CommandController;
+import adapter.controller.commandController.CommandControllers;
+import adapter.presenter.CommandPresenter;
+import entity.Project;
+import useCase.command.Command;
 
 
 public final class TaskList implements Runnable {
@@ -30,16 +33,20 @@ public final class TaskList implements Runnable {
     public void run() {
         while (true) {
             this.io.output("> ");
-            this.io.Flush();
-            String command;
+            this.io.flush();
+            String commandLine;
             try {
-                command = this.io.input();
-                CommandAdapter commandAdapter = new CommandAdapter(this.projects, command);
-                commandAdapter.run(this.io);
+                commandLine = this.io.input();
+                String[] commandRest = commandLine.split(" ", 2);
+                CommandController controller = CommandControllers.getInstance().getCommandController(commandRest[0]);
+                Command command = controller.createCommand(commandLine);
+                CommandPresenter commandPresenter = new CommandPresenter();
+                commandPresenter.execute(command, this.io);
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            if (command.equals(QUIT))
+            if (commandLine.equals(QUIT))
                 break;
 
         }

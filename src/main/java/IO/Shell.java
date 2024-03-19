@@ -24,7 +24,7 @@ public class Shell implements IO{
     }
 
     @Override
-    public void Flush() {
+    public void flush() {
         this.out.flush();
     }
 }

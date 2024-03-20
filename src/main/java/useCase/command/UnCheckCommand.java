@@ -12,7 +12,7 @@ public class UnCheckCommand implements  Command{
     }
     @Override
     public String execute() {
-        Tasks.getInstance().SetDone(this.taskId, false);
+        Tasks.getInstance().setDone(this.taskId, false);
         return "";
     }
 }

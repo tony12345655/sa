@@ -10,7 +10,7 @@ public class CheckCommand implements Command{
     }
     @Override
     public String execute() {
-        Tasks.getInstance().SetDone(this.taskId, true);
+        Tasks.getInstance().setDone(this.taskId, true);
         return "";
     }
 }

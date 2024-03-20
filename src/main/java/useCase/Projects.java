@@ -20,15 +20,17 @@ public class Projects {
         return instance;
     }
     public void createProject(String name){
-        Project project = new Project();
+        Project project = new Project(name);
         this.projects.put(name, project);
     }
-
     public Project getProject(String name){
         return this.projects.get(name);
     }
-
-    public Set<Map.Entry<String, Project>> entrySet(){
-        return this.projects.entrySet();
+    public String showProjects(){
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<String, Project> project : this.projects.entrySet()){
+            result.append(project.getValue().show());
+        }
+        return result.toString();
     }
 }

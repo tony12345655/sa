@@ -21,10 +21,8 @@ public class Tasks {
         tokenId++;
         return task;
     }
-    public Task getTask(long Id){
-        return this.tasks.get(Id);
-    }
-    public void SetDone(long tokenId, boolean done){
+    public void setDone(long tokenId, boolean done){
         this.tasks.get(tokenId).setDone(done);
     }
+
 }

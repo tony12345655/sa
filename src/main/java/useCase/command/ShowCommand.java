@@ -1,14 +1,14 @@
 package useCase.command;
 
-import entity.Project;
-import useCase.Projects;
-import entity.Task;
-
-import java.util.Map;
+import useCase.model.ProjectsModel;
 
 public class ShowCommand implements Command{
+    private final ProjectsModel projectsModel;
+    public ShowCommand(ProjectsModel projectsModel){
+        this.projectsModel = projectsModel;
+    }
     @Override
-    public String execute() {
-        return Projects.getInstance().showProjects();
+    public String execute(String commandLine) {
+        return this.projectsModel.getProjectsInfo();
     }
 }

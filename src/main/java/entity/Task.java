@@ -12,22 +12,22 @@ public final class Task {
     }
 
     public long getId() {
-        return id;
+        return this.id;
     }
 
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public boolean isDone() {
-        return done;
+        return this.done;
     }
 
     public void setDone(boolean done) {
         this.done = done;
     }
 
-    public String show(){
-        return String.format("    [%c] %d: %s%n", (this.isDone() ? 'x' : ' '), this.id, this.description);
+    public String info(){
+        return String.format("    [%c] %d: %s%n", (this.isDone() ? 'x' : ' '), this.id, this.getDescription());
     }
 }

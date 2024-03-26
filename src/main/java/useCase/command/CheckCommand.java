@@ -1,16 +1,17 @@
 package useCase.command;
 
-import useCase.Tasks;
-public class CheckCommand implements Command{
-    private final long taskId;
+import useCase.model.ProjectsModel;
 
-    public CheckCommand(String nextCommand){
-        String[] commandRest = nextCommand.split(" ", 2);
-        this.taskId = Long.parseLong(commandRest[0]);
+public class CheckCommand implements Command{
+    private final ProjectsModel projectsModel;
+    public CheckCommand(ProjectsModel projectsModel){
+        this.projectsModel = projectsModel;
     }
     @Override
-    public String execute() {
-        Tasks.getInstance().setDone(this.taskId, true);
+    public String execute(String commandLine) {
+        String[] commandRest = commandLine.split(" ", 2);
+        long taskId = Long.parseLong(commandRest[1]);
+        this.projectsModel.setTaskDone(taskId, true);
         return "";
     }
 }

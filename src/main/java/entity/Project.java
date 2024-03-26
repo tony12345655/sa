@@ -1,26 +1,29 @@
 package entity;
 
-import entity.Task;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Project {
-    private final String name;
-    private final ArrayList<Task> tasks = new ArrayList<>();
-    public Project(String name){
-        this.name = name;
+    private final ProjectName projectName;
+    private final List<Task> tasks = new ArrayList<>();
+    public Project(ProjectName projectName){
+        this.projectName = projectName;
     }
-    public void AddTask(Task task){
+    public void addTask(Task task){
         this.tasks.add(task);
     }
-    public ArrayList<Task> getTasks(){
-        return this.tasks;
+    public List<Task> getTasks(){
+        return Collections.unmodifiableList(this.tasks);
     }
-    public String show(){
+    public String getName(){
+        return this.projectName.toString();
+    }
+    public String info(){
         StringBuilder result = new StringBuilder();
-        result.append(this.name).append("\r\n");
+        result.append(this.projectName.toString()).append("\r\n");
         for (Task task : this.tasks){
-            result.append(task.show());
+            result.append(task.info());
         }
         result.append("\r\n");
         return result.toString();

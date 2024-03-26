@@ -1,15 +1,17 @@
 package useCase.command;
 
-import useCase.Projects;
+
+import useCase.model.ProjectsModel;
 
 public class AddProjectCommand implements Command{
-    private final String nextCommand;
-    public AddProjectCommand(String nextCommand){
-        this.nextCommand = nextCommand;
+    private final ProjectsModel projectsModel;
+    public AddProjectCommand(ProjectsModel projectsModel){
+        this.projectsModel = projectsModel;
     }
     @Override
-    public String execute() {
-        Projects.getInstance().createProject(this.nextCommand);
+    public String execute(String commandLine) {
+        String[] commandRest = commandLine.split(" ", 2);
+        this.projectsModel.addProject(commandRest[1]);
         return "";
     }
 }

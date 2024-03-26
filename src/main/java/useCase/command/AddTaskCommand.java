@@ -1,26 +1,22 @@
 package useCase.command;
 
 import entity.Project;
-import useCase.Projects;
-import entity.Task;
-import useCase.Tasks;
+import useCase.model.ProjectsModel;
 
 public class AddTaskCommand implements Command{
-    private final Projects projects;
-    private final String nextCommand;
-    public AddTaskCommand(String nextCommand){
-        this.projects = Projects.getInstance();
-        this.nextCommand = nextCommand;
+    private final ProjectsModel projectsModel;
+    public AddTaskCommand(ProjectsModel projectsModel){
+        this.projectsModel = projectsModel;
     }
     @Override
-    public String execute() {
-        String[] commandRest = this.nextCommand.split(" ", 2);
-        Project project = projects.getProject(commandRest[0]);
+    public String execute(String commandLine) {
+        String[] commandRest = commandLine.split(" ", 2);
+        String[] commandRestSecond = commandRest[1].split(" ", 2);
+        Project project = this.projectsModel.getProject(commandRestSecond[0]);
         if (project == null) {
-            return String.format("Could not find a project with the name \"%s\".", commandRest[0]) + '\n';
+            return String.format("Could not find a project with the name \"%s\".", commandRestSecond[0]) + '\n';
         }
-        Task task = Tasks.getInstance().createTask(commandRest[1]);
-        project.AddTask(task);
+        this.projectsModel.addTaskToProject(project.getName(), commandRestSecond[1]);
         return "";
     }
 }

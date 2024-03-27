@@ -4,8 +4,10 @@ import entity.Project;
 import useCase.model.ProjectsModel;
 
 public class AddTaskCommand implements Command{
+    private final CommandDescription commandDescription;
     private final ProjectsModel projectsModel;
-    public AddTaskCommand(ProjectsModel projectsModel){
+    public AddTaskCommand(CommandDescription commandDescription, ProjectsModel projectsModel){
+        this.commandDescription = commandDescription;
         this.projectsModel = projectsModel;
     }
     @Override
@@ -18,5 +20,10 @@ public class AddTaskCommand implements Command{
         }
         this.projectsModel.addTaskToProject(project.getName(), commandRestSecond[1]);
         return "";
+    }
+
+    @Override
+    public String getCommandName() {
+        return this.commandDescription.getCommandName();
     }
 }

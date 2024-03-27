@@ -1,7 +1,7 @@
 package useCase.model;
 
 import entity.Project;
-import entity.ProjectName;
+import entity.ProjectDescription;
 import entity.Projects;
 import entity.Task;
 public class ProjectsModel {
@@ -22,7 +22,7 @@ public class ProjectsModel {
     }
 
     public void addProject(String name){
-        ProjectName projectName = new ProjectName(name);
+        ProjectDescription projectName = new ProjectDescription(name);
         Project project = new Project(projectName);
         this.projects.addProject(project);
     }

@@ -3,24 +3,28 @@ package adapter.controller;
 import useCase.command.*;
 import useCase.model.ProjectsModel;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommandController {
-    private final Map<String, Command> commandMap = new LinkedHashMap<>();
+    private final List<Command> commands = new ArrayList<>();
 
     public CommandController(ProjectsModel projectsModel){
-        commandMap.put("add", new AddCommand(projectsModel));
-        commandMap.put("check", new CheckCommand(projectsModel));
-        commandMap.put("uncheck", new UnCheckCommand(projectsModel));
-        commandMap.put("help", new HelpCommand());
-        commandMap.put("show", new ShowCommand(projectsModel));
-        commandMap.put("error", new ErrorCommand());
+        commands.add(new AddCommand((new CommandDescription("add")), projectsModel));
+        commands.add(new CheckCommand((new CommandDescription("check")), projectsModel));
+        commands.add(new UnCheckCommand((new CommandDescription("uncheck")), projectsModel));
+        commands.add(new HelpCommand((new CommandDescription("help"))));
+        commands.add(new ShowCommand((new CommandDescription("show")), projectsModel));
     }
 
     public String  execute(String commandLine){
         String[] commandRest = commandLine.split(" ", 2);
-        Command command = this.commandMap.getOrDefault(commandRest[0], commandMap.get("error"));
-        return command.execute(commandLine);
+        String commandName = commandRest[0];
+        Command target_command = new ErrorCommand(new CommandDescription("error"));
+        for (Command command : this.commands){
+            if (commandName.equals(command.getCommandName()))
+                target_command = command;
+        }
+        return target_command.execute(commandLine);
     }
 }

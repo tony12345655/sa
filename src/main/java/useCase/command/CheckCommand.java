@@ -3,8 +3,10 @@ package useCase.command;
 import useCase.model.ProjectsModel;
 
 public class CheckCommand implements Command{
+    private final CommandDescription commandDescription;
     private final ProjectsModel projectsModel;
-    public CheckCommand(ProjectsModel projectsModel){
+    public CheckCommand(CommandDescription commandDescription, ProjectsModel projectsModel){
+        this.commandDescription = commandDescription;
         this.projectsModel = projectsModel;
     }
     @Override
@@ -13,5 +15,10 @@ public class CheckCommand implements Command{
         long taskId = Long.parseLong(commandRest[1]);
         this.projectsModel.setTaskDone(taskId, true);
         return "";
+    }
+
+    @Override
+    public String getCommandName() {
+        return this.commandDescription.getCommandName();
     }
 }

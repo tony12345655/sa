@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Project {
-    private final ProjectName projectName;
+    private final ProjectDescription projectDescription;
     private final List<Task> tasks = new ArrayList<>();
-    public Project(ProjectName projectName){
-        this.projectName = projectName;
+    public Project(ProjectDescription projectDescription){
+        this.projectDescription = projectDescription;
     }
     public void addTask(Task task){
         this.tasks.add(task);
@@ -17,11 +17,11 @@ public class Project {
         return Collections.unmodifiableList(this.tasks);
     }
     public String getName(){
-        return this.projectName.toString();
+        return this.projectDescription.getProjectName();
     }
     public String info(){
         StringBuilder result = new StringBuilder();
-        result.append(this.projectName.toString()).append("\r\n");
+        result.append(this.projectDescription.getProjectName()).append("\r\n");
         for (Task task : this.tasks){
             result.append(task.info());
         }

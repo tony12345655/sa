@@ -6,13 +6,13 @@ Task
 Project
 由多個Task組成的List
 
-# useCase
-Tasks
-用來儲存所有Task，產生、取得等等都在這裡實作
+ProjectDescription
+用來儲存project物件所需的靜態參數，如name等等
 
 Projects
-用來儲存所有Project，產生、取得等等都在這裡實作
+用來儲存多個Project
 
+# useCase
 Command
 所以所需的指令都需要繼承這個抽象類別，其子類別有:
 * AddCommand
@@ -24,25 +24,21 @@ Command
 * HelpCommand
 * ShowCommand
 
+CommandDescription
+用來儲存command物件所需的靜態參數，如name等等
+
+ProjectsModel
+一個能對projects進行新增、取得等方法的物件
+
 # Adapter
 1. Controller
 *  CommandController
-   要使用所有的Command需要使用各自的Controller來呼叫才能得到物件，所有的Controller有:
-    * AddController
-    * AddProjectController
-    * AddTaskController
-    * CheckController
-    * UnCheckController
-    * ErrorController
-    * HelpController
-    * ShowController
-* CommandControllers
-  一個用來取得CommandController的物件
+   取的要使用的Command並在裡面執行Command再回傳結果
 
 2. Presenter
-* CommandPresenter
-  會接收一個Command物件以及一個IO物件，將Command的結果傳給IO
+* TaskListPresenter
+  接收Controller回傳的結果與IO，並將它表示出來
 
 # IO
-一個讓所有不同類型的IO繼承的抽象類別，有以下子類別:
-* Shell
+1. TaskListRunner
+   主程式所在的地方，負責做DI

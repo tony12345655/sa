@@ -1,6 +1,7 @@
 package useCase.command;
 
 
+import entity.ProjectName;
 import useCase.repository.ProjectsRepository;
 
 public class AddProjectCommand extends Command{
@@ -12,7 +13,7 @@ public class AddProjectCommand extends Command{
     @Override
     public String execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
-        this.projectsRepository.addProject(commandRest[1]);
+        this.projectsRepository.addProject(ProjectName.of(commandRest[1]));
         return "";
     }
 }

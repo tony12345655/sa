@@ -1,6 +1,6 @@
 package entity;
 
-public final class Task {
+public class Task {
     private final long id;
     private final String description;
     private boolean done;

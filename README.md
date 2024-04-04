@@ -2,15 +2,23 @@
 Task
 一個用來記錄任務內容與狀態的物件
 
+ReadOnlyTask
+繼承Task，不能修改Task內容的物件
 
 Project
 由多個Task組成的List
 
-ProjectDescription
-用來儲存project物件所需的靜態參數，如name等等
+ProjectName
+用來儲存project名子的物件
+
+ReadOnlyProject
+繼承Project，不能修改Project內容的物件
 
 Projects
 用來儲存多個Project
+
+ReadOnlyProjects
+繼承Projects，不能修改Projects內容的物件
 
 # useCase
 Command
@@ -24,10 +32,10 @@ Command
 * HelpCommand
 * ShowCommand
 
-CommandDescription
-用來儲存command物件所需的靜態參數，如name等等
+CommandName
+用來儲存Command名稱的物件
 
-ProjectsModel
+ProjectsRepository
 一個能對projects進行新增、取得等方法的物件
 
 # Adapter

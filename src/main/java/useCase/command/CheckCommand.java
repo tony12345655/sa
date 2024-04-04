@@ -1,24 +1,18 @@
 package useCase.command;
 
-import useCase.model.ProjectsModel;
+import useCase.repository.ProjectsRepository;
 
-public class CheckCommand implements Command{
-    private final CommandDescription commandDescription;
-    private final ProjectsModel projectsModel;
-    public CheckCommand(CommandDescription commandDescription, ProjectsModel projectsModel){
-        this.commandDescription = commandDescription;
-        this.projectsModel = projectsModel;
+public class CheckCommand extends Command{
+    private final ProjectsRepository projectsRepository;
+    public CheckCommand(CommandName name, ProjectsRepository projectsRepository){
+        super(name);
+        this.projectsRepository = projectsRepository;
     }
     @Override
     public String execute(String commandLine) {
         String[] commandRest = commandLine.split(" ", 2);
         long taskId = Long.parseLong(commandRest[1]);
-        this.projectsModel.setTaskDone(taskId, true);
+        this.projectsRepository.setTaskDone(taskId, true);
         return "";
-    }
-
-    @Override
-    public String getCommandName() {
-        return this.commandDescription.getCommandName();
     }
 }

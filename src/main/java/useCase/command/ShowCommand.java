@@ -1,21 +1,16 @@
 package useCase.command;
 
-import useCase.model.ProjectsModel;
+import useCase.repository.ProjectsRepository;
 
-public class ShowCommand implements Command{
-    private final CommandDescription commandDescription;
-    private final ProjectsModel projectsModel;
-    public ShowCommand(CommandDescription commandDescription, ProjectsModel projectsModel){
-        this.commandDescription = commandDescription;
-        this.projectsModel = projectsModel;
+public class ShowCommand extends Command{
+    private final ProjectsRepository projectsRepository;
+    public ShowCommand(CommandName name, ProjectsRepository projectsRepository){
+        super(name);
+        this.projectsRepository = projectsRepository;
     }
     @Override
     public String execute(String commandLine) {
-        return this.projectsModel.getProjectsInfo();
+        return this.projectsRepository.getProjectsInfo();
     }
 
-    @Override
-    public String getCommandName() {
-        return this.commandDescription.getCommandName();
-    }
 }

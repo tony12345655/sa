@@ -1,17 +1,17 @@
-package useCase.model;
+package useCase.repository;
 
 import entity.Project;
-import entity.ProjectDescription;
+import entity.ProjectName;
 import entity.Projects;
 import entity.Task;
-public class ProjectsModel {
+public class ProjectsRepository {
     private long taskId = 1;
     private final Projects projects = new Projects();
 
-    public Project getProject(String projectName){
+    public Project getProject(ProjectName name){
         Project target_project = null;
         for (Project project : this.projects.getProjects()){
-            if (project.getName().equals(projectName))
+            if (project.getName().equals(name))
                 target_project = project;
         }
         return target_project;
@@ -22,14 +22,13 @@ public class ProjectsModel {
     }
 
     public void addProject(String name){
-        ProjectDescription projectName = new ProjectDescription(name);
-        Project project = new Project(projectName);
+        Project project = new Project(ProjectName.of(name));
         this.projects.addProject(project);
     }
 
-    public void addTaskToProject(String projectName, String taskDescription){
+    public void addTaskToProject(ProjectName name, String taskDescription){
         Task task = new Task(taskId, taskDescription, false);
-        Project project = this.getProject(projectName);
+        Project project = this.getProject(name);
         if (project != null){
             project.addTask(task);
             this.taskId++;

@@ -6,14 +6,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import adapter.controller.CommandController;
 import adapter.presenter.TaskListPresenter;
-import useCase.model.ProjectsModel;
+import useCase.repository.ProjectsRepository;
 
 
 public final class TaskListRunner implements Runnable {
     private static final String QUIT = "quit";
     private final BufferedReader in;
     private final PrintWriter out;
-    private final CommandController commandController = new CommandController(new ProjectsModel());
+    private final CommandController commandController = new CommandController(new ProjectsRepository());
 
     public static void main(String[] args){
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

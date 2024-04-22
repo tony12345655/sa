@@ -2,6 +2,7 @@ package entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ReadOnlyProjects extends Projects{
     public ReadOnlyProjects(List<Project> projects){
@@ -19,10 +20,7 @@ public class ReadOnlyProjects extends Projects{
     }
 
     @Override
-    public List<Project> getProjects(){
-        List<Project> readOnlyProjects = new ArrayList<>();
-        for (Project project : super.getProjects())
-            readOnlyProjects.add(new ReadOnlyProject(project.getName(), project.getTasks()));
-        return readOnlyProjects;
+    public void setTaskDone(long taskId, boolean done){
+        throw new RuntimeException("Cannot modify task because it is readonly");
     }
 }

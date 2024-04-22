@@ -9,12 +9,7 @@ public class ProjectsRepository {
     private final Projects projects = new Projects(new ArrayList<>());
 
     public Project getProject(ProjectName name){
-        Project target_project = null;
-        for (Project project : this.projects.getProjects()){
-            if (project.getName().equals(name))
-                target_project = new ReadOnlyProject(project.getName(), project.getTasks());
-        }
-        return target_project;
+      return this.projects.getProject(name);
     }
 
     public String getProjectsInfo(){
@@ -28,19 +23,12 @@ public class ProjectsRepository {
 
     public void addTaskToProject(ProjectName name, String taskDescription){
         Task task = new Task(taskId, taskDescription, false);
-        Project project = this.projects.getProject(name);
-        if (project != null){
-            project.addTask(task);
+        boolean status = this.projects.addTaskToProject(name, task);
+        if (status)
             this.taskId++;
-        }
     }
 
     public void setTaskDone(long taskId, boolean done){
-        for (Project project : projects.getProjects()){
-            for (Task task : project.getTasks()){
-                if (task.getId() == taskId)
-                    task.setDone(done);
-            }
-        }
+        this.projects.setTaskDone(taskId, done);
     }
 }

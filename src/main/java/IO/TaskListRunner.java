@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import adapter.controller.ConsoleController;
-import adapter.presenter.TaskListPresenter;
+import adapter.presenter.ConsolePresenter;
 import useCase.command.*;
 import useCase.repository.ProjectsRepository;
 
@@ -16,13 +16,15 @@ public final class TaskListRunner implements Runnable {
     private final PrintWriter out;
 
     private final ProjectsRepository projectsRepository = new ProjectsRepository();
-    private final ConsoleController commandController = new ConsoleController(
+    private final ConsoleController consoleController = new ConsoleController(
             new AddCommand(CommandName.of("add"), projectsRepository),
             new CheckCommand(CommandName.of("check"), projectsRepository),
             new UnCheckCommand(CommandName.of("uncheck"), projectsRepository),
             new HelpCommand(CommandName.of("help")),
             new ShowCommand(CommandName.of("show"), projectsRepository),
             new ErrorCommand(CommandName.of("error")));
+
+    private final ConsolePresenter consolePresenter = new ConsolePresenter();
 
     public static void main(String[] args){
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -43,9 +45,8 @@ public final class TaskListRunner implements Runnable {
             String commandLine;
             try {
                 commandLine = this.in.readLine();
-                String result = this.commandController.execute(commandLine);
-                TaskListPresenter taskListPresenter = new TaskListPresenter();
-                taskListPresenter.execute(result, this.out);
+                String result = this.consoleController.execute(commandLine);
+                this.consolePresenter.execute(result, this.out);
 
             } catch (IOException e) {
                 throw new RuntimeException(e);

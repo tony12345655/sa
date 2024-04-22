@@ -40,11 +40,11 @@ ProjectsRepository
 
 # Adapter
 1. Controller
-*  CommandController
+*  ConsoleController
    取的要使用的Command並在裡面執行Command再回傳結果
 
 2. Presenter
-* TaskListPresenter
+* ConsolePresenter
   接收Controller回傳的結果與IO，並將它表示出來
 
 # IO

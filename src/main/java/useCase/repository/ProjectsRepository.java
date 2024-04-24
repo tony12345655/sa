@@ -3,6 +3,7 @@ package useCase.repository;
 import entity.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProjectsRepository {
     private long taskId = 1;
@@ -12,8 +13,8 @@ public class ProjectsRepository {
       return this.projects.getProject(name);
     }
 
-    public String getProjectsInfo(){
-        return this.projects.info();
+    public List<Project> getProjects(){
+        return this.projects.getProjects();
     }
 
     public void addProject(ProjectName name){

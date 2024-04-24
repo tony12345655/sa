@@ -20,13 +20,5 @@ public class Project {
     public ProjectName getName(){
         return name;
     }
-    public String info(){
-        StringBuilder result = new StringBuilder();
-        result.append(this.name.toString()).append("\r\n");
-        for (Task task : this.tasks){
-            result.append(task.info());
-        }
-        result.append("\r\n");
-        return result.toString();
-    }
+
 }

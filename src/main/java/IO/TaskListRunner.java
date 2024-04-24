@@ -4,10 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import adapter.controller.ConsoleController;
-import adapter.presenter.ConsolePresenter;
+
+import adapter.controller.CommandController;
+import adapter.controller.HelpController;
+import adapter.controller.ShowController;
+import adapter.presenter.console.ConsoleCommandPresenter;
+import adapter.presenter.console.ConsoleHelpPresenter;
+import adapter.presenter.console.ConsoleShowPresenter;
 import useCase.command.*;
-import useCase.port.output.CommandOutput;
+import useCase.query.HelpQuery;
+import useCase.query.ShowQuery;
 import useCase.repository.ProjectsRepository;
 
 
@@ -17,15 +23,14 @@ public final class TaskListRunner implements Runnable {
     private final PrintWriter out;
 
     private final ProjectsRepository projectsRepository = new ProjectsRepository();
-    private final ConsoleController consoleController = new ConsoleController(
-            new AddCommand(projectsRepository),
-            new CheckCommand(projectsRepository),
-            new UnCheckCommand(projectsRepository),
-            new HelpCommand(),
-            new ShowCommand(projectsRepository),
-            new ErrorCommand());
 
-    private final ConsolePresenter consolePresenter = new ConsolePresenter();
+    // Controller
+    private final HelpController helpController = new HelpController(new HelpQuery());
+    private final ShowController showController = new ShowController(new ShowQuery(projectsRepository));
+    private final CommandController addController = new CommandController(new AddCommand(projectsRepository));
+    private final CommandController checkController = new CommandController(new CheckCommand(projectsRepository));
+    private final CommandController unCheckController = new CommandController(new UnCheckCommand(projectsRepository));
+    private final CommandController errorController = new CommandController(new ErrorCommand());
 
     public static void main(String[] args){
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -45,9 +50,16 @@ public final class TaskListRunner implements Runnable {
             this.out.flush();
             String commandLine;
             try {
-                commandLine = this.in.readLine();
-                CommandOutput out = this.consoleController.execute(commandLine);
-                this.consolePresenter.execute(out, this.out);
+                  commandLine = this.in.readLine();
+                  String[] commandRest = commandLine.split(" ", 2);
+                  switch (commandRest[0]){
+                      case "help" -> new ConsoleHelpPresenter(this.out).present(helpController.execute());
+                      case "show" -> new ConsoleShowPresenter(this.out).present(showController.execute());
+                      case "add" -> this.addController.execute(commandRest[1]);
+                      case "check" -> this.checkController.execute(commandRest[1]);
+                      case "uncheck" -> this.unCheckController.execute(commandRest[1]);
+                      default -> new ConsoleCommandPresenter(this.out).present(this.errorController.execute(commandLine));
+                  }
 
             } catch (IOException e) {
                 throw new RuntimeException(e);

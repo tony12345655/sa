@@ -11,8 +11,8 @@ public class CheckCommand implements Command{
     }
     @Override
     public CommandOutput execute(CommandInput commandInput) {
-        long taskId = Long.parseLong(commandInput.nextCommandLine);
+        long taskId = Long.parseLong(commandInput.commandLine);
         this.projectsRepository.setTaskDone(taskId, true);
-        return new CommandOutput("");
+        return new CommandOutput("success");
     }
 }

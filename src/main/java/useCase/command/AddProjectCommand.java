@@ -13,7 +13,7 @@ public class AddProjectCommand implements Command{
     }
     @Override
     public CommandOutput execute(CommandInput commandInput) {
-        this.projectsRepository.addProject(ProjectName.of(commandInput.nextCommandLine));
-        return new CommandOutput("");
+        this.projectsRepository.addProject(ProjectName.of(commandInput.commandLine));
+        return new CommandOutput("success");
     }
 }

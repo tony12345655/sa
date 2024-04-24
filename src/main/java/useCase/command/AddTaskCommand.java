@@ -13,12 +13,12 @@ public class AddTaskCommand implements Command{
     }
     @Override
     public CommandOutput execute(CommandInput commandInput) {
-        String[] commandRestSecond = commandInput.nextCommandLine.split(" ", 2);
+        String[] commandRestSecond = commandInput.commandLine.split(" ", 2);
         Project project = this.projectsRepository.getProject(ProjectName.of(commandRestSecond[0]));
         if (project == null) {
             return new CommandOutput(String.format("Could not find a project with the name \"%s\".", commandRestSecond[0]) + '\n');
         }
         this.projectsRepository.addTaskToProject(project.getName(), commandRestSecond[1]);
-        return new CommandOutput("");
+        return new CommandOutput("success");
     }
 }

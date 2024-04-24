@@ -1,5 +1,7 @@
 package useCase.query;
 
-abstract public class Query<T>{
-    protected abstract T execute();
+import useCase.port.input.query.QueryInput;
+
+public interface Query<T>{
+    T execute(QueryInput queryInput);
 }

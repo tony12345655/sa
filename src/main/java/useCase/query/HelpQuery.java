@@ -1,12 +1,12 @@
-package useCase.query.helpQuery;
+package useCase.query;
 
 import useCase.dto.HelpDto;
+import useCase.port.input.query.QueryInput;
 import useCase.port.output.HelpOutput;
-import useCase.query.Query;
 
-public class HelpQuery extends Query<HelpOutput> {
+public class HelpQuery implements Query<HelpOutput> {
     @Override
-    public HelpOutput execute(){
+    public HelpOutput execute(QueryInput input){
         HelpDto helpDto = new HelpDto();
         helpDto.heading = "Commands:";
         helpDto.commands.add("show");

@@ -13,8 +13,12 @@ public class Projects {
     }
 
     public Project getProject(ProjectName name){
-        Optional<Project> p = projects.stream().filter(project -> project.getName().equals(name)).findFirst();
+        Optional<Project> p = this.projects.stream().filter(project -> project.getName().equals(name)).findFirst();
         return p.map(project -> new ReadOnlyProject(project.getName(), project.getTasks())).orElse(null);
+    }
+
+    public List<Project> getProjects(){
+        return this.projects.stream().map(project -> (Project)  new ReadOnlyProject(project.getName(), project.getTasks())).toList();
     }
 
     public void setTaskDone(long taskId, boolean done){
@@ -32,13 +36,6 @@ public class Projects {
             p.get().addTask(task);
             return true;
         }
-    }
-
-    public String info(){
-        StringBuilder result = new StringBuilder();
-        for (Project project : this.projects)
-            result.append(project.info());
-        return result.toString();
     }
 
 }

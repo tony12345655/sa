@@ -27,7 +27,4 @@ public class Task {
         this.done = done;
     }
 
-    public String info(){
-        return String.format("    [%c] %d: %s%n", (this.isDone() ? 'x' : ' '), this.id, this.getDescription());
-    }
 }

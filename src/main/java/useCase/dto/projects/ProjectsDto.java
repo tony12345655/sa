@@ -3,5 +3,5 @@ package useCase.dto.projects;
 import java.util.List;
 
 public class ProjectsDto {
-    public List<ProjectDto> projects;
+    public List<ProjectDto> projectDtos;
 }

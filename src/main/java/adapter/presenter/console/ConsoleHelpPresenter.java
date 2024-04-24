@@ -9,6 +9,7 @@ public class ConsoleHelpPresenter {
     public ConsoleHelpPresenter(PrintWriter out){
         this.out = out;
     }
+
     public void present(HelpDto helpDto){
         out.println(helpDto.heading);
         for(var command : helpDto.commands)

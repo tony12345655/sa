@@ -1,8 +1,11 @@
 package useCase.dto.projects;
 
+import entity.ProjectName;
+
 import java.util.List;
 
 public class ProjectDto {
-    public String name;
-    public List<TaskDto> tasks;
+
+    public ProjectName name;
+    public List<TaskDto> taskDtos;
 }

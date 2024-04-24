@@ -11,16 +11,16 @@ public class AddCommand implements Command{
     }
     @Override
     public CommandOutput execute(CommandInput commandInput) {
-        String[] commandRestSecond = commandInput.nextCommandLine.split(" ", 2);
-        Command command = switch (commandRestSecond[0]) {
+        String[] commandRest = commandInput.commandLine.split(" ", 2);
+        Command command = switch (commandRest[0]) {
             case "project" -> new AddProjectCommand(this.projectsRepository);
             case "task" -> new AddTaskCommand(this.projectsRepository);
             default -> null;
         };
 
         if (command != null)
-            return command.execute(new CommandInput(commandInput.nextCommandLine));
+            return command.execute(new CommandInput(commandRest[1]));
         else
-            return new CommandOutput("");
+            return new CommandOutput("not found");
     }
 }

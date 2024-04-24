@@ -15,6 +15,8 @@ public class ShowQuery implements Query<ShowOutput> {
     @Override
     public ShowOutput execute(QueryInput input) {
         ProjectsDto projectsDto = ProjectsMapper.toDto(this.projectsRepository.getProjects());
-        return new ShowOutput(projectsDto);
+        ShowOutput showOutput = new ShowOutput();
+        showOutput.projectsDto = projectsDto;
+        return showOutput;
     }
 }

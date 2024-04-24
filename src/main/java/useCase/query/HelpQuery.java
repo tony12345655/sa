@@ -14,6 +14,8 @@ public class HelpQuery implements Query<HelpOutput> {
         helpDto.commands.add("add task <project name> <task description>");
         helpDto.commands.add("check <task ID>");
         helpDto.commands.add("uncheck <task ID>");
-        return new HelpOutput(helpDto);
+        HelpOutput helpOutput = new HelpOutput();
+        helpOutput.helpDto = helpDto;
+        return helpOutput;
     }
 }

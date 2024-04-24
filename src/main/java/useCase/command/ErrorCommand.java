@@ -1,11 +1,11 @@
 package useCase.command;
 
-public class ErrorCommand extends Command{
-    public ErrorCommand(CommandName name){
-        super(name);
-    }
+import useCase.port.input.CommandInput;
+import useCase.port.output.CommandOutput;
+
+public class ErrorCommand implements Command{
     @Override
-    public String execute(String commandLine) {
-        return String.format("I don't know what the command \"%s\" is.", commandLine) + '\n';
+    public CommandOutput execute(CommandInput commandInput) {
+        return new CommandOutput(String.format("I don't know what the command \"%s\" is.", commandInput.nowCommandLine + commandInput.nextCommandLine) + '\n');
     }
 }

@@ -2,18 +2,18 @@ package useCase.command;
 
 
 import entity.ProjectName;
+import useCase.port.input.CommandInput;
+import useCase.port.output.CommandOutput;
 import useCase.repository.ProjectsRepository;
 
-public class AddProjectCommand extends Command{
+public class AddProjectCommand implements Command{
     private final ProjectsRepository projectsRepository;
-    public AddProjectCommand(CommandName name, ProjectsRepository projectsRepository){
-        super(name);
+    public AddProjectCommand(ProjectsRepository projectsRepository){
         this.projectsRepository = projectsRepository;
     }
     @Override
-    public String execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        this.projectsRepository.addProject(ProjectName.of(commandRest[1]));
-        return "";
+    public CommandOutput execute(CommandInput commandInput) {
+        this.projectsRepository.addProject(ProjectName.of(commandInput.nextCommandLine));
+        return new CommandOutput("");
     }
 }

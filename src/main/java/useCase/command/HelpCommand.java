@@ -1,11 +1,18 @@
 package useCase.command;
 
-public class HelpCommand extends Command{
-    public HelpCommand(CommandName name){
-        super(name);
-    }
+import useCase.port.input.CommandInput;
+import useCase.port.output.CommandOutput;
+
+public class HelpCommand implements Command{
     @Override
-    public String execute(String commandLine){
-        return "Commands:" + '\n' + "  show" + '\n' + "  add project <project name>" + '\n' + "  add task <project name> <task description>" + '\n' + "  check <task ID>" + '\n' + "  uncheck <task ID>" + '\n';
+    public CommandOutput execute(CommandInput commandInput){
+        return new CommandOutput("""
+                Commands:
+                  show
+                  add project <project name>
+                  add task <project name> <task description>
+                  check <task ID>
+                  uncheck <task ID>
+                """);
     }
 }

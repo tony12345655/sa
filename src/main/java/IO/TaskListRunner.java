@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import adapter.controller.ConsoleController;
 import adapter.presenter.ConsolePresenter;
 import useCase.command.*;
+import useCase.port.output.CommandOutput;
 import useCase.repository.ProjectsRepository;
 
 
@@ -17,12 +18,12 @@ public final class TaskListRunner implements Runnable {
 
     private final ProjectsRepository projectsRepository = new ProjectsRepository();
     private final ConsoleController consoleController = new ConsoleController(
-            new AddCommand(CommandName.of("add"), projectsRepository),
-            new CheckCommand(CommandName.of("check"), projectsRepository),
-            new UnCheckCommand(CommandName.of("uncheck"), projectsRepository),
-            new HelpCommand(CommandName.of("help")),
-            new ShowCommand(CommandName.of("show"), projectsRepository),
-            new ErrorCommand(CommandName.of("error")));
+            new AddCommand(projectsRepository),
+            new CheckCommand(projectsRepository),
+            new UnCheckCommand(projectsRepository),
+            new HelpCommand(),
+            new ShowCommand(projectsRepository),
+            new ErrorCommand());
 
     private final ConsolePresenter consolePresenter = new ConsolePresenter();
 
@@ -45,8 +46,8 @@ public final class TaskListRunner implements Runnable {
             String commandLine;
             try {
                 commandLine = this.in.readLine();
-                String result = this.consoleController.execute(commandLine);
-                this.consolePresenter.execute(result, this.out);
+                CommandOutput out = this.consoleController.execute(commandLine);
+                this.consolePresenter.execute(out, this.out);
 
             } catch (IOException e) {
                 throw new RuntimeException(e);

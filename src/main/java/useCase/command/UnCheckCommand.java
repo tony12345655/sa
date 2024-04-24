@@ -1,19 +1,19 @@
 package useCase.command;
 
+import useCase.port.input.CommandInput;
+import useCase.port.output.CommandOutput;
 import useCase.repository.ProjectsRepository;
 
-public class UnCheckCommand extends   Command{
+public class UnCheckCommand implements Command{
     private final ProjectsRepository projectsRepository;
 
-    public UnCheckCommand(CommandName name, ProjectsRepository projectsRepository){
-        super(name);
+    public UnCheckCommand(ProjectsRepository projectsRepository){
         this.projectsRepository = projectsRepository;
     }
     @Override
-    public String execute(String commandLine) {
-        String[] commandRest = commandLine.split(" ", 2);
-        long taskId = Long.parseLong(commandRest[1]);
+    public CommandOutput execute(CommandInput commandInput) {
+        long taskId = Long.parseLong(commandInput.nextCommandLine);
         this.projectsRepository.setTaskDone(taskId, false);
-        return "";
+        return new CommandOutput("");
     }
 }

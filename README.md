@@ -21,32 +21,55 @@ ReadOnlyProjects
 繼承Projects，不能修改Projects內容的物件
 
 # useCase
-Command
-所以所需的指令都需要繼承這個抽象類別，其子類別有:
+## Command
+沒有對資料查詢的指令需繼承這個抽象類別，其子類別有:
 * AddCommand
 * AddProjectCommand
 * AddTaskCommand
 * CheckCommand
 * UnCheckCommand
 * ErrorCommand
-* HelpCommand
-* ShowCommand
 
-CommandName
-用來儲存Command名稱的物件
+## Query
+有需要將資料回傳的指令需繼承這個抽象類別，其子類別有:
+* HelpQuery
+* ShowQuery
 
-ProjectsRepository
+## ProjectsRepository
 一個能對projects進行新增、取得等方法的物件
 
-# Adapter
-1. Controller
-*  ConsoleController
-   取的要使用的Command並在裡面執行Command再回傳結果
+## InputData
+將command與query所需的input分別寫成兩種物件，其中query為了考慮到沒有請求而需要回傳的情況所以有個nullQueryInput
 
-2. Presenter
-* ConsolePresenter
-  接收Controller回傳的結果與IO，並將它表示出來
+## OutputData
+所有的command因為output資料型態都一樣所以共用一個CommandOutput，而query由於所需回傳的資料型態不同因此每種query都有它自己的output，像是HelpOutput
+
+## Dto
+總共有四個Dto物件，分別為:
+* ProjectsDto
+* ProjectDto
+* TaskDto
+* HelpDto
+
+## Mapper
+負責將物件轉成Dto，分別有:
+* ProjectsMapper
+* ProjectMapper
+* TaskMapper
+
+# Adapter
+## Controller
+*  CommandController
+   會接收一個字串並轉為InputData傳入Command中得到一個OutputData，並將資訊回傳
+*  HelpController
+   會回傳取得資料的Dto物件
+*  ShowController
+   會回傳取得資料的Dto物件
+
+
+## Presenter
+總共有三個Presenter，分別是ConsoleCommandPresenter、ConsoleHelpPresenter、ConsoleShowPresenter，都會接收一個PrintWriter物件與分別對應的Controller回傳的結果，再將結果顯示出來
 
 # IO
 1. TaskListRunner
-   主程式所在的地方，負責做DI
+   主程式所在的地方，判斷該呼叫哪些Controller與Presenter，負責做DI

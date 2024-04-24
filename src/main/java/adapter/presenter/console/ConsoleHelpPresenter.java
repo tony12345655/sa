@@ -1,11 +1,10 @@
 package adapter.presenter.console;
 
-import useCase.query.helpQuery.HelpDto;
+import useCase.dto.HelpDto;
 
 import java.io.PrintWriter;
 
 public class ConsoleHelpPresenter {
-
     private final PrintWriter out;
     public ConsoleHelpPresenter(PrintWriter out){
         this.out = out;

@@ -1,5 +1,6 @@
 package useCase.query.helpQuery;
 
+import useCase.dto.HelpDto;
 import useCase.port.output.HelpOutput;
 import useCase.query.Query;
 

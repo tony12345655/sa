@@ -1,6 +1,6 @@
 package useCase.port.output;
 
-import useCase.query.helpQuery.HelpDto;
+import useCase.dto.HelpDto;
 
 public class HelpOutput {
     public HelpDto helpDto;

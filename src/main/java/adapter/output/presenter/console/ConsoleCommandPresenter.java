@@ -1,7 +1,4 @@
-package adapter.presenter.console;
-
-import adapter.controller.CommandController;
-import useCase.port.output.CommandOutput;
+package adapter.output.presenter.console;
 
 import java.io.PrintWriter;
 

@@ -1,11 +1,8 @@
-package adapter.presenter.console;
+package adapter.output.presenter.console;
 
-import entity.Project;
-import entity.Projects;
-import useCase.dto.projects.ProjectDto;
-import useCase.dto.projects.ProjectsDto;
-import useCase.dto.projects.TaskDto;
-import useCase.port.output.ShowOutput;
+import useCase.port.output.projects.dto.ProjectDto;
+import useCase.port.output.projects.dto.ProjectsDto;
+import useCase.port.output.projects.dto.TaskDto;
 
 import java.io.PrintWriter;
 

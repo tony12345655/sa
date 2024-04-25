@@ -2,18 +2,21 @@ package useCase.command;
 
 
 import entity.ProjectName;
+import entity.Projects;
 import useCase.port.input.CommandInput;
-import useCase.port.output.CommandOutput;
-import useCase.repository.ProjectsRepository;
+import useCase.port.output.command.CommandOutput;
+import adapter.output.presenter.repository.ProjectsInMemoryRepository;
 
 public class AddProjectCommand implements Command{
-    private final ProjectsRepository projectsRepository;
-    public AddProjectCommand(ProjectsRepository projectsRepository){
+    private final ProjectsInMemoryRepository projectsRepository;
+    public AddProjectCommand(ProjectsInMemoryRepository projectsRepository){
         this.projectsRepository = projectsRepository;
     }
     @Override
     public CommandOutput execute(CommandInput commandInput) {
-        this.projectsRepository.addProject(ProjectName.of(commandInput.commandLine));
+        Projects projects = this.projectsRepository.getProjects();
+        projects.addProject(ProjectName.of(commandInput.commandLine));
+        this.projectsRepository.save(projects);
         return new CommandOutput("success");
     }
 }

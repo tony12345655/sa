@@ -4,11 +4,19 @@ import java.util.*;
 
 public class Projects {
     private final List<Project> projects;
-    public Projects(List<Project> projects){
+    private long lstTaskId;
+    public Projects(List<Project> projects, long lstTaskId){
         this.projects = projects;
+        this.lstTaskId = lstTaskId;
     }
 
-    public void addProject(Project project){
+    public Projects(){
+        this.projects = new ArrayList<>();
+        this.lstTaskId = 1;
+    }
+
+    public void addProject(ProjectName name){
+        Project project = new Project(name, new ArrayList<>());
         this.projects.add(project);
     }
 
@@ -28,14 +36,15 @@ public class Projects {
         }
     }
 
-    public boolean addTaskToProject(ProjectName name, Task task){
+    public void addTaskToProject(ProjectName name, String description, boolean done){
+        Task task = new Task(this.lstTaskId, description, done);
         Optional<Project> p = projects.stream().filter(project -> project.getName().equals(name)).findFirst();
-        if (p.isEmpty())
-            return false;
-        else{
-            p.get().addTask(task);
-            return true;
-        }
+        p.ifPresent(project -> project.addTask(task));
+        this.lstTaskId++;
+    }
+
+    public long getLstTaskId(){
+        return this.lstTaskId;
     }
 
 }

@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Optional;
 
 public class ReadOnlyProjects extends Projects{
-    public ReadOnlyProjects(List<Project> projects){
-        super(projects);
+    public ReadOnlyProjects(List<Project> projects, long lastTaskId){
+        super(projects, lastTaskId);
     }
 
     @Override
-    public void addProject(Project project){
+    public void addProject(ProjectName projectName){
         throw new RuntimeException("Cannot modify task because it is readonly");
     }
 

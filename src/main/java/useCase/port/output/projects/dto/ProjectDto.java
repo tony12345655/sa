@@ -1,4 +1,4 @@
-package useCase.dto.projects;
+package useCase.port.output.projects.dto;
 
 import entity.ProjectName;
 

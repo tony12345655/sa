@@ -1,14 +1,14 @@
-package adapter.controller;
+package adapter.input.controller.console;
 
 import useCase.port.input.query.NullQueryInput;
 import useCase.port.input.query.QueryInput;
-import useCase.port.output.HelpOutput;
-import useCase.dto.HelpDto;
+import useCase.port.output.query.help.HelpOutput;
+import useCase.port.output.query.help.HelpDto;
 import useCase.query.HelpQuery;
 
-public class HelpController {
+public class ConsoleHelpController {
     private final HelpQuery helpQuery;
-    public HelpController(HelpQuery helpQuery){
+    public ConsoleHelpController(HelpQuery helpQuery){
         this.helpQuery = helpQuery;
     }
     public HelpDto execute(){

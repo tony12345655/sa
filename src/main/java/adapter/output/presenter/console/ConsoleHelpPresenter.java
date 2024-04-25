@@ -1,6 +1,6 @@
-package adapter.presenter.console;
+package adapter.output.presenter.console;
 
-import useCase.dto.HelpDto;
+import useCase.port.output.query.help.HelpDto;
 
 import java.io.PrintWriter;
 

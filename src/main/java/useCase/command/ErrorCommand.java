@@ -1,7 +1,7 @@
 package useCase.command;
 
 import useCase.port.input.CommandInput;
-import useCase.port.output.CommandOutput;
+import useCase.port.output.command.CommandOutput;
 
 public class ErrorCommand implements Command{
     @Override

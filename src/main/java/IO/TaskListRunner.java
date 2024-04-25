@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-import adapter.controller.CommandController;
-import adapter.controller.HelpController;
-import adapter.controller.ShowController;
-import adapter.presenter.console.ConsoleCommandPresenter;
-import adapter.presenter.console.ConsoleHelpPresenter;
-import adapter.presenter.console.ConsoleShowPresenter;
+import adapter.input.controller.console.ConsoleCommandController;
+import adapter.input.controller.console.ConsoleHelpController;
+import adapter.input.controller.console.ConsoleShowController;
+import adapter.output.presenter.console.ConsoleCommandPresenter;
+import adapter.output.presenter.console.ConsoleHelpPresenter;
+import adapter.output.presenter.console.ConsoleShowPresenter;
 import useCase.command.*;
 import useCase.query.HelpQuery;
 import useCase.query.ShowQuery;
-import useCase.repository.ProjectsRepository;
+import adapter.output.presenter.repository.ProjectsInMemoryRepository;
 
 
 public final class TaskListRunner implements Runnable {
@@ -22,15 +22,15 @@ public final class TaskListRunner implements Runnable {
     private final BufferedReader in;
     private final PrintWriter out;
 
-    private final ProjectsRepository projectsRepository = new ProjectsRepository();
+    private final ProjectsInMemoryRepository projectsRepository = new ProjectsInMemoryRepository();
 
     // Controller
-    private final HelpController helpController = new HelpController(new HelpQuery());
-    private final ShowController showController = new ShowController(new ShowQuery(projectsRepository));
-    private final CommandController addController = new CommandController(new AddCommand(projectsRepository));
-    private final CommandController checkController = new CommandController(new CheckCommand(projectsRepository));
-    private final CommandController unCheckController = new CommandController(new UnCheckCommand(projectsRepository));
-    private final CommandController errorController = new CommandController(new ErrorCommand());
+    private final ConsoleHelpController helpController = new ConsoleHelpController(new HelpQuery());
+    private final ConsoleShowController showController = new ConsoleShowController(new ShowQuery(projectsRepository));
+    private final ConsoleCommandController addController = new ConsoleCommandController(new AddCommand(projectsRepository));
+    private final ConsoleCommandController checkController = new ConsoleCommandController(new CheckCommand(projectsRepository));
+    private final ConsoleCommandController unCheckController = new ConsoleCommandController(new UnCheckCommand(projectsRepository));
+    private final ConsoleCommandController errorController = new ConsoleCommandController(new ErrorCommand());
 
     public static void main(String[] args){
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));

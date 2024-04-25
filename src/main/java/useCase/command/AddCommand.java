@@ -1,12 +1,12 @@
 package useCase.command;
 
 import useCase.port.input.CommandInput;
-import useCase.port.output.CommandOutput;
-import useCase.repository.ProjectsRepository;
+import useCase.port.output.command.CommandOutput;
+import adapter.output.presenter.repository.ProjectsInMemoryRepository;
 
 public class AddCommand implements Command{
-    private final ProjectsRepository projectsRepository;
-    public AddCommand(ProjectsRepository projectsRepository){
+    private final ProjectsInMemoryRepository projectsRepository;
+    public AddCommand(ProjectsInMemoryRepository projectsRepository){
         this.projectsRepository = projectsRepository;
     }
     @Override

@@ -1,15 +1,15 @@
-package adapter.controller;
+package adapter.input.controller.console;
 
-import useCase.dto.projects.ProjectsDto;
+import useCase.port.output.projects.dto.ProjectsDto;
 import useCase.port.input.query.NullQueryInput;
 import useCase.port.input.query.QueryInput;
-import useCase.port.output.ShowOutput;
+import useCase.port.output.query.show.ShowOutput;
 import useCase.query.ShowQuery;
 
-public class ShowController {
+public class ConsoleShowController {
     private final ShowQuery showQuery;
 
-    public ShowController(ShowQuery showQuery){
+    public ConsoleShowController(ShowQuery showQuery){
         this.showQuery = showQuery;
     }
 

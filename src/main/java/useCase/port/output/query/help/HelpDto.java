@@ -1,4 +1,4 @@
-package useCase.dto;
+package useCase.port.output.query.help;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,13 @@
-package adapter.controller;
+package adapter.input.controller.console;
 
 import useCase.command.Command;
 import useCase.port.input.CommandInput;
-import useCase.port.output.CommandOutput;
+import useCase.port.output.command.CommandOutput;
 
-public class CommandController {
+public class ConsoleCommandController {
     private final Command command;
 
-    public CommandController(Command command){
+    public ConsoleCommandController(Command command){
         this.command = command;
     }
 

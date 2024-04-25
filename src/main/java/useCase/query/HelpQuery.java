@@ -1,8 +1,8 @@
 package useCase.query;
 
-import useCase.dto.HelpDto;
+import useCase.port.output.query.help.HelpDto;
 import useCase.port.input.query.QueryInput;
-import useCase.port.output.HelpOutput;
+import useCase.port.output.query.help.HelpOutput;
 
 public class HelpQuery implements Query<HelpOutput> {
     @Override

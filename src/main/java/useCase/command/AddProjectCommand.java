@@ -17,6 +17,6 @@ public class AddProjectCommand implements Command{
         Projects projects = this.projectsRepository.getProjects();
         projects.addProject(ProjectName.of(commandInput.commandLine));
         this.projectsRepository.save(projects);
-        return new CommandOutput("success");
+        return new CommandOutput(null);
     }
 }

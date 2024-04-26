@@ -10,6 +10,7 @@ public class ConsoleCommandPresenter {
     }
 
     public void present(String message){
-        this.out.println(message);
+        if (message != null)
+            this.out.println(message);
     }
 }

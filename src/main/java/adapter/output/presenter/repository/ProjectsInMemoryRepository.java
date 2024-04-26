@@ -6,16 +6,20 @@ import useCase.port.output.projects.ProjectsRepository;
 import useCase.port.output.projects.po.ProjectsPo;
 
 public class ProjectsInMemoryRepository implements ProjectsRepository {
-    private ProjectsPo projectsPo = new ProjectsPo();
+
+    private final ProjectsInMemoryRepositoryPeer peer;
+    public ProjectsInMemoryRepository(ProjectsInMemoryRepositoryPeer peer){
+        this.peer = peer;
+    }
 
     @Override
     public void save(Projects projects) {
-        this.projectsPo = ProjectsMapper.toPo(projects);
+        peer.save(ProjectsMapper.toPo(projects));
     }
 
     @Override
     public Projects getProjects(){
-        return ProjectsMapper.toDomain(this.projectsPo);
+        return ProjectsMapper.toDomain(peer.getProjectsPo());
     }
 
 }

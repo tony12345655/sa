@@ -16,6 +16,6 @@ public class CheckCommand implements Command{
         Projects projects = this.projectsRepository.getProjects();
         projects.setTaskDone(taskId, true);
         this.projectsRepository.save(projects);
-        return new CommandOutput("success");
+        return new CommandOutput(null);
     }
 }

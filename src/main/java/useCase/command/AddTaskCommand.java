@@ -22,6 +22,6 @@ public class AddTaskCommand implements Command{
         }
         projects.addTaskToProject(project.getName(), commandRestSecond[1], false);
         this.projectsRepository.save(projects);
-        return new CommandOutput("success");
+        return new CommandOutput(null);
     }
 }

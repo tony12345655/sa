@@ -41,7 +41,7 @@
                     <programs>
                         <program>
                             <id>task-list</id>
-                            <mainClass>IO.TaskListRunner</mainClass>
+                            <mainClass>IO.TaskListAPP</mainClass>
                         </program>
                     </programs>
                 </configuration>

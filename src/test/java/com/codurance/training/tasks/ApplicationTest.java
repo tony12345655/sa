@@ -7,7 +7,7 @@ import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 import java.io.PrintWriter;
 
-import IO.TaskListRunner;
+import IO.TaskListAPP;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +29,7 @@ public final class ApplicationTest {
     public ApplicationTest() throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(new PipedInputStream(inStream)));
         PrintWriter out = new PrintWriter(new PipedOutputStream(outStream), true);
-        TaskListRunner taskList = new TaskListRunner(in, out);
+        TaskListAPP taskList = new TaskListAPP(in, out);
         applicationThread = new Thread(taskList);
     }
 

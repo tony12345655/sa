@@ -17,6 +17,6 @@ public class UnCheckCommand implements Command{
         Projects projects = this.projectsRepository.getProjects();
         projects.setTaskDone(taskId, false);
         this.projectsRepository.save(projects);
-        return new CommandOutput("success");
+        return new CommandOutput("");
     }
 }

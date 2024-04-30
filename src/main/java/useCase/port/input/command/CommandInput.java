@@ -1,4 +1,4 @@
-package useCase.port.input;
+package useCase.port.input.command;
 
 public class CommandInput {
     public String commandLine;

@@ -3,10 +3,11 @@ package adapter.output.presenter.console;
 import useCase.port.output.projects.dto.ProjectDto;
 import useCase.port.output.projects.dto.ProjectsDto;
 import useCase.port.output.projects.dto.TaskDto;
+import useCase.port.output.query.show.ShowPresenter;
 
 import java.io.PrintWriter;
 
-public class ConsoleShowPresenter {
+public class ConsoleShowPresenter implements ShowPresenter {
     private final PrintWriter out;
 
     public ConsoleShowPresenter(PrintWriter out){

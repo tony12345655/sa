@@ -1,13 +1,14 @@
-package useCase.command;
+package useCase.service;
 
 import entity.Projects;
-import useCase.port.input.CommandInput;
+import useCase.port.input.command.CommandInput;
+import useCase.port.input.command.CommandUseCase;
 import useCase.port.output.command.CommandOutput;
-import adapter.output.presenter.repository.ProjectsInMemoryRepository;
+import adapter.output.repository.ProjectsInMemoryRepository;
 
-public class CheckCommand implements Command{
+public class CheckService implements CommandUseCase {
     private final ProjectsInMemoryRepository projectsRepository;
-    public CheckCommand(ProjectsInMemoryRepository projectsRepository){
+    public CheckService(ProjectsInMemoryRepository projectsRepository){
         this.projectsRepository = projectsRepository;
     }
     @Override

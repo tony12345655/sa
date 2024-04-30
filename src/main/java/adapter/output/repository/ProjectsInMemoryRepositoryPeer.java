@@ -1,4 +1,4 @@
-package adapter.output.presenter.repository;
+package adapter.output.repository;
 
 import entity.Projects;
 import useCase.port.output.projects.po.ProjectsPo;

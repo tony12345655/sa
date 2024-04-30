@@ -1,16 +1,17 @@
-package useCase.query;
+package useCase.service;
 
 import entity.Projects;
+import useCase.port.input.query.Show.ShowUseCase;
 import useCase.port.output.projects.dto.ProjectsDto;
 import useCase.port.output.projects.ProjectsMapper;
 import useCase.port.input.query.QueryInput;
 import useCase.port.output.query.show.ShowOutput;
-import adapter.output.presenter.repository.ProjectsInMemoryRepository;
+import adapter.output.repository.ProjectsInMemoryRepository;
 
-public class ShowQuery implements Query<ShowOutput> {
+public class ShowService implements ShowUseCase {
 
     private final ProjectsInMemoryRepository projectsRepository;
-    public ShowQuery(ProjectsInMemoryRepository projectsRepository){
+    public ShowService(ProjectsInMemoryRepository projectsRepository){
         this.projectsRepository = projectsRepository;
     }
     @Override

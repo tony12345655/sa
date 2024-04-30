@@ -1,17 +1,16 @@
 package adapter.input.controller.console;
 
 import adapter.output.presenter.console.ConsoleShowPresenter;
-import useCase.port.output.projects.dto.ProjectsDto;
 import useCase.port.input.query.NullQueryInput;
 import useCase.port.input.query.QueryInput;
 import useCase.port.output.query.show.ShowOutput;
-import useCase.query.ShowQuery;
+import useCase.service.ShowService;
 
 public class ConsoleShowController implements ConsoleController{
-    private final ShowQuery showQuery;
+    private final ShowService showQuery;
     private final ConsoleShowPresenter presenter;
 
-    public ConsoleShowController(ShowQuery showQuery, ConsoleShowPresenter consoleShowPresenter){
+    public ConsoleShowController(ShowService showQuery, ConsoleShowPresenter consoleShowPresenter){
         this.showQuery = showQuery;
         this.presenter = consoleShowPresenter;
     }

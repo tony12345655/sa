@@ -1,8 +1,10 @@
 package adapter.output.presenter.console;
 
+import useCase.port.output.command.CommandPresenter;
+
 import java.io.PrintWriter;
 
-public class ConsoleCommandPresenter {
+public class ConsoleCommandPresenter implements CommandPresenter {
     private final PrintWriter out;
 
     public ConsoleCommandPresenter(PrintWriter out){

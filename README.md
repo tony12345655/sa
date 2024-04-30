@@ -17,59 +17,55 @@ ReadOnlyProject
 Projects
 用來儲存多個Project
 
-ReadOnlyProjects
-繼承Projects，不能修改Projects內容的物件
-
 # useCase
-## Command
-沒有對資料查詢的指令需繼承這個抽象類別，其子類別有:
-* AddCommand
-* AddProjectCommand
-* AddTaskCommand
-* CheckCommand
-* UnCheckCommand
-* ErrorCommand
 
-## Query
-有需要將資料回傳的指令需繼承這個抽象類別，其子類別有:
-* HelpQuery
-* ShowQuery
+## port.input.command
+### Command
+一個Interface
+### CommandUseCase
+繼承Command Interface
 
-## ProjectsRepository
-一個能對projects進行新增、取得等方法的物件
+## port.input.query
+### Query
+一個Interface
+### HelpUseCase
+繼承Query Interfact，也是個Interfact，讓HelpService繼承
+### ShowUseCase
+繼承Query Interfact，也是個Interfact，讓ShowService繼承
 
-## InputData
-將command與query所需的input分別寫成兩種物件，其中query為了考慮到沒有請求而需要回傳的情況所以有個nullQueryInput
+## port.output.command
+### CommandOuput
+command的輸出屬性，裡面有一個成員message型態為字串
+### CommandPresenter
+一個Interface，會讓Adapter層的實作presenter繼承
 
-## OutputData
-所有的command因為output資料型態都一樣所以共用一個CommandOutput，而query由於所需回傳的資料型態不同因此每種query都有它自己的output，像是HelpOutput
+## port.output.query
+裡面有兩種Query，每Query都有他自己的Output與DTO，也有presenter來讓Adapter曾繼承
 
-## Dto
-總共有四個Dto物件，分別為:
-* ProjectsDto
-* ProjectDto
-* TaskDto
-* HelpDto
+## port.output.projects
+裡面包含Task、Project、Projects三種Entity物件的DTO與PO，並且各自有Mapper來進行轉換，還有一個ProjectsRepository的Interface來讓Adapter層的實作繼承
 
-## Mapper
-負責將物件轉成Dto，分別有:
-* ProjectsMapper
-* ProjectMapper
-* TaskMapper
+## port.service
+實作所有command與query，總共有以下service
+* AddService
+* AddProjectService
+* AddTaskService
+* CheckService
+* UnCheckService
+* ErrorService
+* HelpService
+* ShowService
 
 # Adapter
-## Controller
-*  CommandController
-   會接收一個字串並轉為InputData傳入Command中得到一個OutputData，並將資訊回傳
-*  HelpController
-   會回傳取得資料的Dto物件
-*  ShowController
-   會回傳取得資料的Dto物件
+## adpater.input.controller.console
+裡面每一個controller會去對應相對的service，將傳進來的指令解析並取得service的回傳，再讓presenter表示出結果。有一個ControllerExcute來當作給client使用的入口。
 
+## adpater.output.presenter.console
+裡面有三種不同的presenter會對應到不同的usecase回傳結果去表示出結果
 
-## Presenter
-總共有三個Presenter，分別是ConsoleCommandPresenter、ConsoleHelpPresenter、ConsoleShowPresenter，都會接收一個PrintWriter物件與分別對應的Controller回傳的結果，再將結果顯示出來
+## adpater.output.repositroy
+實作repository的地方，會繼承useCase層的Interface並將以PO的方式來儲存實體以避免跨層
 
 # IO
-1. TaskListRunner
+1. TaskListAPP
    主程式所在的地方，判斷該呼叫哪些Controller與Presenter，負責做DI

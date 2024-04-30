@@ -1,20 +1,21 @@
-package useCase.command;
+package useCase.service;
 
-import useCase.port.input.CommandInput;
+import useCase.port.input.command.CommandInput;
+import useCase.port.input.command.CommandUseCase;
 import useCase.port.output.command.CommandOutput;
-import adapter.output.presenter.repository.ProjectsInMemoryRepository;
+import adapter.output.repository.ProjectsInMemoryRepository;
 
-public class AddCommand implements Command{
+public class AddService implements CommandUseCase {
     private final ProjectsInMemoryRepository projectsRepository;
-    public AddCommand(ProjectsInMemoryRepository projectsRepository){
+    public AddService(ProjectsInMemoryRepository projectsRepository){
         this.projectsRepository = projectsRepository;
     }
     @Override
     public CommandOutput execute(CommandInput commandInput) {
         String[] commandRest = commandInput.commandLine.split(" ", 2);
-        Command command = switch (commandRest[0]) {
-            case "project" -> new AddProjectCommand(this.projectsRepository);
-            case "task" -> new AddTaskCommand(this.projectsRepository);
+        CommandUseCase command = switch (commandRest[0]) {
+            case "project" -> new AddProjectService(this.projectsRepository);
+            case "task" -> new AddTaskService(this.projectsRepository);
             default -> null;
         };
 

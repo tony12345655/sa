@@ -1,10 +1,11 @@
-package useCase.query;
+package useCase.service;
 
+import useCase.port.input.query.Help.HelpUseCase;
 import useCase.port.output.query.help.HelpDto;
 import useCase.port.input.query.QueryInput;
 import useCase.port.output.query.help.HelpOutput;
 
-public class HelpQuery implements Query<HelpOutput> {
+public class HelpService implements HelpUseCase {
     @Override
     public HelpOutput execute(QueryInput input){
         HelpDto helpDto = new HelpDto();

@@ -9,12 +9,10 @@ import adapter.input.controller.console.*;
 import adapter.output.presenter.console.ConsoleCommandPresenter;
 import adapter.output.presenter.console.ConsoleHelpPresenter;
 import adapter.output.presenter.console.ConsoleShowPresenter;
-import adapter.output.presenter.repository.ProjectsInMemoryRepositoryPeer;
+import adapter.output.repository.ProjectsInMemoryRepositoryPeer;
 import entity.Projects;
-import useCase.command.*;
-import useCase.query.HelpQuery;
-import useCase.query.ShowQuery;
-import adapter.output.presenter.repository.ProjectsInMemoryRepository;
+import useCase.service.*;
+import adapter.output.repository.ProjectsInMemoryRepository;
 
 
 public final class TaskListAPP implements Runnable {
@@ -36,12 +34,12 @@ public final class TaskListAPP implements Runnable {
         ProjectsInMemoryRepository projectsInMemoryRepository = new ProjectsInMemoryRepository(new ProjectsInMemoryRepositoryPeer());
         projectsInMemoryRepository.save(new Projects());
         this.consoleControllerExecutor = new ConsoleControllerExecutor();
-        consoleControllerExecutor.register(ProjectsCommands.ADD, new AddConsoleController(new AddCommand(projectsInMemoryRepository)));
-        consoleControllerExecutor.register(ProjectsCommands.CHECK, new CheckConsoleController(new CheckCommand(projectsInMemoryRepository)));
-        consoleControllerExecutor.register(ProjectsCommands.UNCHECK, new UnCheckConsoleController(new UnCheckCommand(projectsInMemoryRepository)));
-        consoleControllerExecutor.register(ProjectsCommands.ERROR, new ErrorConsoleController(new ErrorCommand(), new ConsoleCommandPresenter(out)));
-        consoleControllerExecutor.register(ProjectsCommands.HELP, new HelpConsoleController(new HelpQuery(), new ConsoleHelpPresenter(out)));
-        consoleControllerExecutor.register(ProjectsCommands.SHOW, new ConsoleShowController(new ShowQuery(projectsInMemoryRepository), new ConsoleShowPresenter(out)));
+        consoleControllerExecutor.register(ProjectsCommands.ADD, new AddConsoleController(new AddService(projectsInMemoryRepository)));
+        consoleControllerExecutor.register(ProjectsCommands.CHECK, new CheckConsoleController(new CheckService(projectsInMemoryRepository)));
+        consoleControllerExecutor.register(ProjectsCommands.UNCHECK, new UnCheckConsoleController(new UnCheckService(projectsInMemoryRepository)));
+        consoleControllerExecutor.register(ProjectsCommands.ERROR, new ErrorConsoleController(new ErrorService(), new ConsoleCommandPresenter(out)));
+        consoleControllerExecutor.register(ProjectsCommands.HELP, new HelpConsoleController(new HelpService(), new ConsoleHelpPresenter(out)));
+        consoleControllerExecutor.register(ProjectsCommands.SHOW, new ConsoleShowController(new ShowService(projectsInMemoryRepository), new ConsoleShowPresenter(out)));
 
     }
 
